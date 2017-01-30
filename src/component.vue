@@ -1,5 +1,5 @@
 <script>
-import {Bus} from './bus.vue';
+import Bus from './bus';
 
 export default {
     name: 'vuedals',
@@ -93,7 +93,7 @@ export default {
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="vuedal" :class="getCssClasses(index)">
             <header v-if="vuedal.title || vuedal.dismisable">
                 <span class="title">{{ vuedal.title }}</span>
-                <span @click="close(vuedal)" v-if="vuedal.dismisable" class="close">&times;</span>
+                <span @click="close(index)" v-if="vuedal.dismisable" class="close">&times;</span>
             </header>
 
             <component :is="vuedal.component" :props="vuedal.props"></component>

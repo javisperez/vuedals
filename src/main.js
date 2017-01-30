@@ -1,7 +1,7 @@
-import {Bus} from './bus.vue';
-import {Component} from './component.vue';
+import Bus from './bus';
+import Component from './component.vue';
 
-export const Vuedals = {
+export default {
     install(Vue) {
         // Global $vuedals property
         Vue.prototype.$vuedals = new Vue({
@@ -13,18 +13,18 @@ export const Vuedals = {
                 });
 
                 Bus.$on('closed', data => {
-                    this.$emit('vuedals:close', data);
+                    this.$emit('vuedals:closed', data);
                 });
 
                 Bus.$on('destroyed', data => {
                     this.$emit('vuedals:destroyed', data);
                 });
 
-                this.$on('vuedals:new', options => {
+                this.$on('new', options => {
                     Bus.$emit('new', options);
                 });
 
-                this.$on('vuedals:close', index => {
+                this.$on('close', index => {
                     Bus.$emit('close', index);
                 });
             },
@@ -37,6 +37,19 @@ export const Vuedals = {
                 close(index = null) {
                     Bus.$emit('close', index);
                 }
+            }
+        });
+
+        // Mixer for components
+        Vue.mixin({
+            created() {
+                this.$on('vuedals:new', options => {
+                    Bus.$emit('new', options);
+                });
+
+                this.$on('vuedals:close', index => {
+                    Bus.$emit('close', index);
+                });
             }
         });
     }
