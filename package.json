@@ -2,7 +2,8 @@
   "name": "vuedals",
   "version": "1.0.1",
   "scripts": {
-    "build": "rm -rf ./dist && webpack --config ./webpack.config.js && webpack --config webpack.config.min.js"
+    "build": "rm -rf ./dist && webpack --config ./webpack.config.js && webpack --config webpack.config.min.js",
+    "release": "bash ./release.sh"
   },
   "description": "Event based Vue's modal windows, with a single component",
   "main": "dist/vuedals.js",
