@@ -1,3 +1,7 @@
+## DEMO
+
+[View demo on jsFiddle](https://jsfiddle.net/ackqudv7/1/)
+
 ## Vuedals v1.0.0
 
 Multiple modals windows in a single component instance.
