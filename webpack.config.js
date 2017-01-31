@@ -51,6 +51,17 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.BannerPlugin(banner)
+        new webpack.BannerPlugin(banner),
+         new webpack.optimize.UglifyJsPlugin({
+            minimize: false,
+            sourceMap: false,
+            mangle: false,
+            compress: {
+                warnings: false
+            },
+            output: {
+                comments: true
+            }
+        })
     ]
 };
