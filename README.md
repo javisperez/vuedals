@@ -94,13 +94,13 @@ methods: {
 You can emit an event in your component:
 
 ```js
-this.$emit('vuedals:close'**[, index]**);
+this.$emit('vuedals:close'[, index]);
 ```
 
 a method:
 
 ```js
-this.$vuedals.close(**[index]**);
+this.$vuedals.close([index]);
 ```
 
 or the Vuedals Event Bus:
@@ -112,7 +112,7 @@ import {Bus as Vuedals} from 'vuedals';
 
 methods: { 
 	openNewModal() {
-		Vuedals.$emit('close'**[, index]**);
+		Vuedals.$emit('close'[, index]);
 	}
 }
 ```
