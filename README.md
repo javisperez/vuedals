@@ -1,10 +1,10 @@
+# Vuedals
+
+Multiple modals windows in a single component instance.
+
 ## DEMO
 
 [View demo on jsFiddle](https://jsfiddle.net/ackqudv7/1/)
-
-## Vuedals
-
-Multiple modals windows in a single component instance.
 
 ### What is this?
 
@@ -18,7 +18,7 @@ e.g. if you want to have 3 modals, you don't need to add the component 3 times, 
 
 ```js
 import Vue from 'vue';
-import {Vuedals, Bus as VuedalsBus} from 'vuedals';
+import {Vuedals, Component as Vuedal, Bus as VuedalsBus} from 'vuedals';
 
 Vue.use(Vuedals);
 
@@ -51,10 +51,15 @@ var myComp = Vue.extend({
 var vm = new Vue({
 	el: '#app',
 	
-	components: {myComp},
+	components: {
+		myComp,
+		Vuedal
+	},
 	
 	template: `<div>
 	    <my-comp></my-comp>
+
+	    <vuedal></vuedal>
 	</div>`
 });
 ```
