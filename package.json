@@ -1,6 +1,6 @@
 {
   "name": "vuedals",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./webpack.config.js && webpack --config webpack.config.min.js",
     "release": "bash ./release.sh"
