@@ -14,6 +14,14 @@ A plugin to open stocked modals windows, event based, with just one component in
 
 e.g. if you want to have 3 modals, you don't need to add the component 3 times, just one (preferably in the root of your app) and open as many modals as you want by using an Event Bus
 
+## Install
+
+Install with npm:
+
+```js
+npm install --save vuedals
+```
+
 ## Example
 
 ```js
