@@ -26,7 +26,7 @@ npm install --save vuedals
 
 ```js
 import Vue from 'vue';
-import {Vuedals, Component as Vuedal, Bus as VuedalsBus} from 'vuedals';
+import {default as Vuedals, Component as Vuedal, Bus as VuedalsBus} from 'vuedals';
 
 Vue.use(Vuedals);
 
