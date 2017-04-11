@@ -21,11 +21,11 @@ export default {
                 });
 
                 this.$on('new', options => {
-                    Bus.$emit('new', options);
+                    this.open(options);
                 });
 
-                this.$on('close', index => {
-                    Bus.$emit('close', index);
+                this.$on('close', data => {
+                    this.close(data);
                 });
             },
 
@@ -34,8 +34,8 @@ export default {
                     Bus.$emit('new', options);
                 },
 
-                close(index = null) {
-                    Bus.$emit('close', index);
+                close(data = null) {
+                    Bus.$emit('close', data);
                 }
             }
         });
@@ -47,8 +47,8 @@ export default {
                     Bus.$emit('new', options);
                 });
 
-                this.$on('vuedals:close', index => {
-                    Bus.$emit('close', index);
+                this.$on('vuedals:close', data => {
+                    Bus.$emit('close', data);
                 });
             }
         });

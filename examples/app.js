@@ -16,7 +16,7 @@ const Sample = {
                 component: {
                     name: 'inside-modal',
 
-                    template: `<div>Im a cute modal</div>`
+                    template: `<div>Im a cute modal</div>`,
                 }
             })
         }
@@ -64,7 +64,10 @@ const ModalComponent2 = {
         openModal() {
             this.$emit('vuedals:new', {
                 dismisable: false,
-                component: ModalComponent3
+                component: ModalComponent3,
+                onClose(data) {
+                    console.log('[Vuedals] Data from component:',data);
+                }
             });
         },
 
@@ -91,7 +94,9 @@ const ModalComponent3 = {
 
     methods: {
         close() {
-            Bus.$emit('close');
+            Bus.$emit('close', {
+                sample: [1,2,3]
+            });
         }
     },
 

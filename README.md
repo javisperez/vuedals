@@ -107,13 +107,13 @@ methods: {
 You can emit an event in your component:
 
 ```js
-this.$emit('vuedals:close'[, index]);
+this.$emit('vuedals:close'[, data]);
 ```
 
 a method:
 
 ```js
-this.$vuedals.close([index]);
+this.$vuedals.close([data]);
 ```
 
 or the Vuedals Event Bus:
@@ -125,7 +125,7 @@ import {Bus as Vuedals} from 'vuedals';
 
 methods: { 
 	openNewModal() {
-		Vuedals.$emit('close'[, index]);
+		Vuedals.$emit('close'[, data]);
 	}
 }
 ```
@@ -140,22 +140,27 @@ Depending if you're creating the modal *from the component* or *from the Vuedals
 Open a new modal window, with the given options
 
 ##### vuedals:close / close
-Close a modal window, if an index is given, will close that modal number. If no index is given, will close the most recent modal
+Close the most recently opened modal window, if data is given, will pass it to the `onClose` option.
 
 #### vuedals:opened / opened
 When a modal was open. Returns an object with:
 
 1. The index of the recently opened modal
-2. The data of the recentyl opened modal (i.e. the options)
+2. The options passed to that modal instance
 
 #### vuedals:closed / closed
 When a modal was closed. Returns an object with:
+
+1. The index of the closed modal
+2. The options passed to that modal instance
+3. The data given when `close` was called
 
 #### vuedals:destroyed / destroyed
 Emitted when the last modal instance is closed. *i.e. there's not more open modals left*
 
 1. The index of the closed modal
-2. The data of the closed modal (i.e. the options)
+2. The options passed to that modal instance
+3. The data given when `close` was called
 
 ### Options
 
@@ -210,6 +215,7 @@ methods: {
 The size of the modal.
 
 Possible values are:
+- **xs**: 350px width
 - **sm**: 550px width
 - **md**: 650px width
 - **lg**: 850px width
@@ -227,3 +233,66 @@ Title of the modal window
 
 *Default: ''*
 
+#### onClose
+Callback function to call when the modal is closed. Any given data is passed as a parameter for that callback. Example:
+
+```js
+this.$vuedals.open({
+	name: 'test-component',
+
+	props: {
+		firstname: 'John',
+		lastname: 'Doe'
+	},
+
+	component: {
+		name: 'show-john-doe',
+
+		props: ['props'],
+
+		template: `
+			<div>
+				Hi {{ props.firstname }} {{ props.lastname }}
+			</div>
+		`
+	},
+
+	onClose(data) {
+		console.log('Data received from the vuedal instance': data);
+	}
+});
+```
+
+#### onDismiss
+Callback function to call when the modal is closed.
+
+Please notice that even `close` and `dismiss` both close the active modal instance (closes the modal) only the `close` event accepts data argument that can be passed to the callback, while `dismiss` just send the modal to close.
+
+Example:
+
+```js
+this.$vuedals.open({
+	name: 'test-component',
+
+	props: {
+		firstname: 'John',
+		lastname: 'Doe'
+	},
+
+	component: {
+		name: 'show-john-doe',
+
+		props: ['props'],
+
+		template: `
+			<div>
+				Hi {{ props.firstname }} {{ props.lastname }}
+			</div>
+		`
+	},
+
+	onDismiss() {
+		console.log('The user dismissed the modal');
+	}
+});
+```

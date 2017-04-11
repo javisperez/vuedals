@@ -6,27 +6,31 @@ export default {
 
     created() {
         // Create a new Vuedal instance
-        Bus.$on('new', data => {
+        Bus.$on('new', options => {
             const defaults = {
                 title: null,
                 dismisable: true,
                 name: '',
-                size: 'md'
+                size: 'md',
+                onClose() {},
+                onDismiss() {}
             };
 
-            const options = Object.assign(defaults, data);
+            options = Object.assign(defaults, options);
 
             this.vuedals.push(options);
 
             // Let know everyone else that a new Vuedal is open
             Bus.$emit('opened', {
                 index: this.vuedals.length - 1,
-                data
+                options
             });
         });
 
         // When a close event is receive, close the Vuedal instance
-        Bus.$on('close', _ => this.close());
+        Bus.$on('close', data => this.close(data));
+
+        Bus.$on('dismiss', _ => this.dismiss());
     },
 
     data() {
@@ -37,19 +41,8 @@ export default {
     },
 
     methods: {
-        // Close the given/current Vuedal
-        close(index = null) {
-            // Unless the user specify which one he wants to close
-            if (!index)
-                // Close the most recent Vuedal instance
-                index = this.vuedals.length - 1;
-
-            // Notify the app about this window being closed
-            Bus.$emit('closed', {
-                index,
-                data: this.vuedals[index]
-            });
-
+        // Remove the given index from the vuedals array
+        splice(index) {
             // And if it was the last window, also notify that all instances are destroyed
             if (index === 0)
                 Bus.$emit('destroyed');
@@ -63,6 +56,41 @@ export default {
                 return;
 
             this.vuedals.splice(index, 1);
+        },
+
+        // Close the modal and pass any given data
+        close(data = null) {
+            // Close the most recent Vuedal instance
+            const index = this.vuedals.length - 1;
+
+            // Notify the app about this window being closed
+            Bus.$emit('closed', {
+                index,
+                instance: this.vuedals[index],
+                data
+            });
+
+            // Dismiss callback
+            this.vuedals[index].onClose(data);
+
+            this.splice(index);
+        },
+
+        // Dismiss the active modal
+        dismiss() {
+            // Close the most recent Vuedal instance
+            const index = this.vuedals.length - 1;
+
+            // Notify the app about this window being closed
+            Bus.$emit('dismissed', {
+                index,
+                instance: this.vuedals[index]
+            });
+
+            // Dismiss callback
+            this.vuedals[index].onDismiss();
+
+            this.splice(index);
         },
 
         // Get css classes
@@ -93,7 +121,7 @@ export default {
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="vuedal" :class="getCssClasses(index)">
             <header v-if="vuedal.title || vuedal.dismisable">
                 <span class="title">{{ vuedal.title }}</span>
-                <span @click="close(index)" v-if="vuedal.dismisable" class="close">&times;</span>
+                <span @click="dismiss()" v-if="vuedal.dismisable" class="close">&times;</span>
             </header>
 
             <component :is="vuedal.component" :props="vuedal.props"></component>
@@ -135,6 +163,8 @@ export default {
     &.lg { width: 850px; }
 
     &.sm { width: 550px; }
+
+    &.xs { width: 350px; }
 
     &.disabled {
         opacity: 0.2;
