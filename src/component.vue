@@ -188,7 +188,7 @@ export default {
 
         .title { font-size: 21px; font-weight: 100;}
 
-        .close { float: right; font-size: 26px; font-weight: 100; line-height: 21px; }
+        .close { float: right; font-size: 26px; font-weight: 100; line-height: 21px; cursor: pointer; }
     }
 }
 
