@@ -38,7 +38,7 @@ const ModalComponent1 = {
 
     name: 'inside-modal-1',
 
-    props: ['props'],
+    props: ['example'],
 
     methods: {
         openModal() {
@@ -51,7 +51,7 @@ const ModalComponent1 = {
 
     template: `<div>
         <p>This is a component inside the modal, you can pass some props by using a "props" options.</p>
-        <blockquote>{{ props.example }}</blockquote>
+        <blockquote>{{ example }}</blockquote>
         <span class="btn btn-primary" @click="openModal()">Open another modal</span>
     </div>`
 };

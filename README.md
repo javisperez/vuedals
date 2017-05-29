@@ -175,7 +175,7 @@ A reference name of the modal. Use to define the css class of that modal
 A Vue component to display inside the modal
 
 #### props
-A props object that will be passed to the component inside the modal, with the name "**props**".
+A props object that will be passed to the component inside the modal.
 
 example:
 
@@ -189,6 +189,7 @@ methods: {
 		this.$vuedals.open({
 			name: 'test-component',
 
+            // Pass these props to the component
 			props: {
 				firstname: 'John',
 				lastname: 'Doe'
@@ -197,12 +198,12 @@ methods: {
 			component: {
 				name: 'show-john-doe',
 
-				// Important, the name of the prop is "props"
-				props: ['props'],
+				// Expect these props values
+				props: ['firstname', 'lastname'],
 
 				template: `
 					<div>
-						Hi {{ props.firstname }} {{ props.lastname }}
+						Hi {{ firstname }} {{ lastname }}
 					</div>
 				`
 			}
@@ -240,6 +241,7 @@ Callback function to call when the modal is closed. Any given data is passed as 
 this.$vuedals.open({
 	name: 'test-component',
 
+    // Pass these props to the component
 	props: {
 		firstname: 'John',
 		lastname: 'Doe'
@@ -248,11 +250,12 @@ this.$vuedals.open({
 	component: {
 		name: 'show-john-doe',
 
-		props: ['props'],
+        // Pass these props to the component
+		props: ['firstname', 'lastname'],
 
 		template: `
 			<div>
-				Hi {{ props.firstname }} {{ props.lastname }}
+				Hi {{ firstname }} {{ lastname }}
 			</div>
 		`
 	},
@@ -274,6 +277,7 @@ Example:
 this.$vuedals.open({
 	name: 'test-component',
 
+	// Pass these props to the component
 	props: {
 		firstname: 'John',
 		lastname: 'Doe'
@@ -282,11 +286,12 @@ this.$vuedals.open({
 	component: {
 		name: 'show-john-doe',
 
-		props: ['props'],
+		// expect these props
+		props: ['firstname', 'lastname'],
 
 		template: `
 			<div>
-				Hi {{ props.firstname }} {{ props.lastname }}
+				Hi {{ firstname }} {{ lastname }}
 			</div>
 		`
 	},

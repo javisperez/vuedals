@@ -124,7 +124,7 @@ export default {
                 <span @click="dismiss()" v-if="vuedal.dismisable" class="close">&times;</span>
             </header>
 
-            <component :is="vuedal.component" :props="vuedal.props"></component>
+            <component :is="vuedal.component" v-bind="vuedal.props"></component>
         </div>
     </div>
 </transition>
