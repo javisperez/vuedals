@@ -4,7 +4,7 @@ VueJS (2.x) Plugin for multiple modals windows with a single component instance.
 
 ## DEMO
 
-[View demo on jsFiddle](https://jsfiddle.net/ackqudv7/1/)
+[View demo on jsFiddle](https://jsfiddle.net/ackqudv7/19/)
 
 ### What is this?
 
