@@ -25,6 +25,8 @@ export default {
                 index: this.vuedals.length - 1,
                 options
             });
+
+            document.querySelector('.vuedals').scrollTop = 0;
         });
 
         // When a close event is receive, close the Vuedal instance
@@ -70,10 +72,13 @@ export default {
                 data
             });
 
-            // Dismiss callback
+            // Close callback
             this.vuedals[index].onClose(data);
 
             this.splice(index);
+
+            // Firefox fix: https://github.com/javisperez/vuedals/issues/1
+            document.querySelector('.vuedals').scrollTop = 0;
         },
 
         // Dismiss the active modal
@@ -91,6 +96,9 @@ export default {
             this.vuedals[index].onDismiss();
 
             this.splice(index);
+
+            // Firefox fix: https://github.com/javisperez/vuedals/issues/1
+            document.querySelector('.vuedals').scrollTop = 0;
         },
 
         // Get css classes
