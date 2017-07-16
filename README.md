@@ -234,6 +234,20 @@ Title of the modal window
 
 *Default: ''*
 
+#### header
+An object that will be used to generate a custom header
+
+*Default: null*
+
+```
+header: {
+	component: 'header-component',
+	props: {
+		custom: 'Props'
+	}
+}
+```
+
 #### onClose
 Callback function to call when the modal is closed. Any given data is passed as a parameter for that callback. Example:
 
