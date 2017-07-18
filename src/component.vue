@@ -127,11 +127,13 @@ export default {
 <transition tag="div" name="vuedal">
     <div class="vuedals" v-show="vuedals.length">
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="vuedal" :class="getCssClasses(index)">
-            <header v-if="vuedal.title || vuedal.dismisable">
+            <header v-if="(vuedal.title || vuedal.dismisable) && !vuedal.header">
                 <span class="title">{{ vuedal.title }}</span>
                 <span @click="dismiss()" v-if="vuedal.dismisable" class="close">&times;</span>
             </header>
-
+            <header v-if="vuedal.header">
+                <component :is="vuedal.header.component" v-bind="vuedal.header.props"></component>
+            </header>
             <component :is="vuedal.component" v-bind="vuedal.props"></component>
         </div>
     </div>
