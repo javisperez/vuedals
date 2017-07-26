@@ -26,6 +26,8 @@ export default {
                 options
             });
 
+            this.body.classList.add('vuedal-open');
+
             document.querySelector('.vuedals').scrollTop = 0;
         });
 
@@ -46,8 +48,10 @@ export default {
         // Remove the given index from the vuedals array
         splice(index) {
             // And if it was the last window, also notify that all instances are destroyed
-            if (index === 0)
+            if (index === 0) {
+                this.body.classList.remove('vuedal-open');
                 Bus.$emit('destroyed');
+            }
 
             if (!index) {
                 this.vuedals.pop();
@@ -118,6 +122,12 @@ export default {
         // Get the last element of the Vuedals array (the most recent Vuedal instance)
         $last() {
             return this.vuedals.length - 1;
+        },
+
+        body() {
+            if (typeof document !== 'undefined') {
+                return document.querySelector('body');
+            }
         }
     }
 }
@@ -141,6 +151,9 @@ export default {
 </template>
 
 <style lang="sass">
+body.vuedal-open {
+    overflow: hidden;
+}
 
 .vuedals {
     background-color: rgba(0,0,0,.5);
