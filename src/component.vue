@@ -9,7 +9,7 @@ export default {
         Bus.$on('new', options => {
             const defaults = {
                 title: null,
-                dismisable: true,
+                dismissable: true,
                 name: '',
                 size: 'md',
                 onClose() {},
@@ -127,9 +127,9 @@ export default {
 <transition tag="div" name="vuedal">
     <div class="vuedals" v-show="vuedals.length">
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="index" :class="getCssClasses(index)">
-            <header v-if="(vuedal.title || vuedal.dismisable) && !vuedal.header">
+            <header v-if="(vuedal.title || vuedal.dismissable) && !vuedal.header">
                 <span class="title">{{ vuedal.title }}</span>
-                <span @click="dismiss()" v-if="vuedal.dismisable" class="close">&times;</span>
+                <span @click="dismiss()" v-if="vuedal.dismissable" class="close">&times;</span>
             </header>
             <header v-if="vuedal.header">
                 <component :is="vuedal.header.component" v-bind="vuedal.header.props"></component>
