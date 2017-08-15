@@ -91,7 +91,7 @@ export default {
             const index = this.vuedals.length - 1;
 
             // Check dismiss callback result for prevention
-            if (!this.vuedals[index].onDismiss()) return;
+            if (this.vuedals[index].onDismiss() === false) return;
 
             // Notify the app about this window being closed
             Bus.$emit('dismissed', {
