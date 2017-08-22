@@ -285,6 +285,8 @@ Callback function to call when the modal is closed.
 
 Please notice that even `close` and `dismiss` both close the active modal instance (closes the modal) only the `close` event accepts data argument that can be passed to the callback, while `dismiss` just send the modal to close.
 
+The callback may prevent the modal closing by returning `false`.
+
 Example:
 
 ```js

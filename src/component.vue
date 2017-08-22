@@ -103,14 +103,14 @@ export default {
                 // Close the most recent Vuedal instance
                 index = this.$last;
 
+            // Check dismiss callback result for prevention
+            if (this.vuedals[index].onDismiss() === false) return;
+
             // Notify the app about this window being closed
             Bus.$emit('dismissed', {
                 index,
                 instance: this.vuedals[index]
             });
-
-            // Dismiss callback
-            this.vuedals[index].onDismiss();
 
             this.splice(index);
 
