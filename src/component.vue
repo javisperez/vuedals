@@ -22,7 +22,7 @@ export default {
 
             // Let know everyone else that a new Vuedal is open
             Bus.$emit('opened', {
-                index: this.vuedals.length - 1,
+                index: this.$last,
                 options
             });
 
@@ -47,27 +47,35 @@ export default {
     methods: {
         // Remove the given index from the vuedals array
         splice(index) {
-            // And if it was the last window, also notify that all instances are destroyed
-            if (index === 0) {
+            if (index === -1)
+                return;
+            
+            // If there's nothing to close, ignore it
+            if (!this.vuedals.length)
+                return;
+
+            // If there's no index, or index === 0, pop() it
+            if (!index)
+                this.vuedals.pop();
+            else
+                this.vuedals.splice(index, 1);
+            
+            // And if it was the last window, notify that all instances are destroyed
+            if (!this.vuedals.length) {
                 this.body.classList.remove('vuedal-open');
                 Bus.$emit('destroyed');
             }
-
-            if (!index) {
-                this.vuedals.pop();
-                return;
-            }
-
-            if (index === -1)
-                return;
-
-            this.vuedals.splice(index, 1);
         },
 
         // Close the modal and pass any given data
-        close(data = null) {
-            // Close the most recent Vuedal instance
-            const index = this.vuedals.length - 1;
+        close(data = null, index = null) {
+            // If there's nothing to close, ignore it
+            if (!this.vuedals.length)
+                return;
+
+            if (!index)
+                // Close the most recent Vuedal instance
+                index = this.$last;
 
             // Notify the app about this window being closed
             Bus.$emit('closed', {
@@ -86,9 +94,14 @@ export default {
         },
 
         // Dismiss the active modal
-        dismiss() {
-            // Close the most recent Vuedal instance
-            const index = this.vuedals.length - 1;
+        dismiss(index = null) {
+            // If there's nothing to close, ignore it
+            if (!this.vuedals.length)
+                return;
+
+            if (!index)
+                // Close the most recent Vuedal instance
+                index = this.$last;
 
             // Notify the app about this window being closed
             Bus.$emit('dismissed', {
