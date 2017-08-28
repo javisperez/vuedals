@@ -63,7 +63,7 @@ const ModalComponent2 = {
     methods: {
         openModal() {
             this.$emit('vuedals:new', {
-                dismisable: false,
+                dismissable: false,
                 component: ModalComponent3,
                 onClose(data) {
                     console.log('[Vuedals] Data from component:',data);
