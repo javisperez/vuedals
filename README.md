@@ -31,44 +31,44 @@ import {default as Vuedals, Component as Vuedal, Bus as VuedalsBus} from 'vuedal
 Vue.use(Vuedals);
 
 var myComp = Vue.extend({
-	template: `<div>
-	        <h1>Hello World!</h1>
-			<button @click="showIt()">Show me the money</button>
-	    </div>`,
-	
-	methods: {
-		showIt() {
-			VuedalsBus.$emit('new', {
-				name: 'showing-the-money',
+    template: `<div>
+            <h1>Hello World!</h1>
+            <button @click="showIt()">Show me the money</button>
+        </div>`,
 
-				component: {
-					name: 'the-money',
+    methods: {
+        showIt() {
+            VuedalsBus.$emit('new', {
+                name: 'showing-the-money',
 
-					template: `
-						<div>
-							<h1>THE MONEY!</h1>
-							<p>Money, money, money, moooneeyyy $ $ $ $</p>
-						</div>
-					`
-				}
-			});
-		}
-	}
+                component: {
+                    name: 'the-money',
+
+                    template: `
+                        <div>
+                            <h1>THE MONEY!</h1>
+                            <p>Money, money, money, moooneeyyy $ $ $ $</p>
+                        </div>
+                    `
+                }
+            });
+        }
+    }
 });
 
 var vm = new Vue({
-	el: '#app',
-	
-	components: {
-		myComp,
-		Vuedal
-	},
-	
-	template: `<div>
-	    <my-comp></my-comp>
+    el: '#app',
 
-	    <vuedal></vuedal>
-	</div>`
+    components: {
+        myComp,
+        Vuedal
+    },
+
+    template: `<div>
+        <my-comp></my-comp>
+
+        <vuedal></vuedal>
+    </div>`
 });
 ```
 
@@ -96,9 +96,9 @@ import {Bus as Vuedals} from 'vuedals';
 ...
 
 methods: { 
-	openNewModal() {
-		Vuedals.$emit('new', { options });
-	}
+    openNewModal() {
+        Vuedals.$emit('new', { options });
+    }
 }
 ```
 
@@ -124,9 +124,9 @@ import {Bus as Vuedals} from 'vuedals';
 ...
 
 methods: { 
-	openNewModal() {
-		Vuedals.$emit('close'[, data]);
-	}
+    openNewModal() {
+        Vuedals.$emit('close'[, data]);
+    }
 }
 ```
 
@@ -185,30 +185,30 @@ import {Bus as Vuedals} from 'vuedals';
 ...
 
 methods: {
-	openModal() {
-		this.$vuedals.open({
-			name: 'test-component',
+    openModal() {
+        this.$vuedals.open({
+            name: 'test-component',
 
             // Pass these props to the component
-			props: {
-				firstname: 'John',
-				lastname: 'Doe'
-			},
+            props: {
+                firstname: 'John',
+                lastname: 'Doe'
+            },
 
-			component: {
-				name: 'show-john-doe',
+            component: {
+                name: 'show-john-doe',
 
-				// Expect these props values
-				props: ['firstname', 'lastname'],
+                // Expect these props values
+                props: ['firstname', 'lastname'],
 
-				template: `
-					<div>
-						Hi {{ firstname }} {{ lastname }}
-					</div>
-				`
-			}
-		});
-	}	
+                template: `
+                    <div>
+                        Hi {{ firstname }} {{ lastname }}
+                    </div>
+                `
+            }
+        });
+    }
 }
 ```
 
@@ -241,10 +241,10 @@ An object that will be used to generate a custom header
 
 ```
 header: {
-	component: 'header-component',
-	props: {
-		custom: 'Props'
-	}
+    component: 'header-component',
+    props: {
+        custom: 'Props'
+    }
 }
 ```
 
@@ -253,30 +253,30 @@ Callback function to call when the modal is closed. Any given data is passed as 
 
 ```js
 this.$vuedals.open({
-	name: 'test-component',
+    name: 'test-component',
 
     // Pass these props to the component
-	props: {
-		firstname: 'John',
-		lastname: 'Doe'
-	},
+    props: {
+        firstname: 'John',
+        lastname: 'Doe'
+    },
 
-	component: {
-		name: 'show-john-doe',
+    component: {
+        name: 'show-john-doe',
 
         // Pass these props to the component
-		props: ['firstname', 'lastname'],
+        props: ['firstname', 'lastname'],
 
-		template: `
-			<div>
-				Hi {{ firstname }} {{ lastname }}
-			</div>
-		`
-	},
+        template: `
+            <div>
+                Hi {{ firstname }} {{ lastname }}
+            </div>
+        `
+    },
 
-	onClose(data) {
-		console.log('Data received from the vuedal instance': data);
-	}
+    onClose(data) {
+        console.log('Data received from the vuedal instance': data);
+    }
 });
 ```
 
@@ -291,29 +291,29 @@ Example:
 
 ```js
 this.$vuedals.open({
-	name: 'test-component',
+    name: 'test-component',
 
-	// Pass these props to the component
-	props: {
-		firstname: 'John',
-		lastname: 'Doe'
-	},
+    // Pass these props to the component
+    props: {
+        firstname: 'John',
+        lastname: 'Doe'
+    },
 
-	component: {
-		name: 'show-john-doe',
+    component: {
+        name: 'show-john-doe',
 
-		// expect these props
-		props: ['firstname', 'lastname'],
+        // expect these props
+        props: ['firstname', 'lastname'],
 
-		template: `
-			<div>
-				Hi {{ firstname }} {{ lastname }}
-			</div>
-		`
-	},
+        template: `
+            <div>
+                Hi {{ firstname }} {{ lastname }}
+            </div>
+        `
+    },
 
-	onDismiss() {
-		console.log('The user dismissed the modal');
-	}
+    onDismiss() {
+        console.log('The user dismissed the modal');
+    }
 });
 ```
