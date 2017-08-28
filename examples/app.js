@@ -64,9 +64,10 @@ const ModalComponent2 = {
         openModal() {
             this.$emit('vuedals:new', {
                 dismisable: false,
+                escapable: true,
                 component: ModalComponent3,
                 onClose(data) {
-                    console.log('[Vuedals] Data from component:',data);
+                    console.log('[Vuedals] Data from component:', data);
                 }
             });
         },
@@ -97,12 +98,21 @@ const ModalComponent3 = {
             Bus.$emit('close', {
                 sample: [1,2,3]
             });
+        },
+
+        closePrevious()  {
+            Bus.$emit('close', {
+                $index(current) {
+                    return current - 1;
+                }
+            });
         }
     },
 
     template: `<div>
         <h3>INCEPTION</h3>
         <p class="text-right">
+            <span class="btn btn-default" @click="closePrevious()">Close previous modal</span>
             <span class="btn btn-default" @click="close()">Close</span>
         </p>
     </div>`

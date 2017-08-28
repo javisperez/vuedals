@@ -12,6 +12,7 @@ export default {
                 dismissable: true,
                 name: '',
                 size: 'md',
+                escapable: false,
                 onClose() {},
                 onDismiss() {}
             };
@@ -32,9 +33,32 @@ export default {
         });
 
         // When a close event is receive, close the Vuedal instance
-        Bus.$on('close', data => this.close(data));
+        Bus.$on('close', data => {
+            let index = null;
 
-        Bus.$on('dismiss', _ => this.dismiss());
+            // If an $index was given on the data
+            if (data && data.$index)
+                index = data.$index;
+
+            if (index === null)
+                // Close the most recent Vuedal instance
+                index = this.$last;
+
+            this.close(data, index);
+        });
+
+        // Same for dismiss
+        Bus.$on('dismiss', index => {
+            if (index === null)
+                // Close the most recent Vuedal instance
+                index = this.$last;
+
+            this.dismiss(index);
+        });
+
+        window.addEventListener('keyup', e => {
+            this.handleEscapeKey(e);
+        });
     },
 
     data() {
@@ -46,7 +70,7 @@ export default {
 
     methods: {
         // Remove the given index from the vuedals array
-        splice(index) {
+        splice(index = null) {
             if (index === -1)
                 return;
             
@@ -54,8 +78,8 @@ export default {
             if (!this.vuedals.length)
                 return;
 
-            // If there's no index, or index === 0, pop() it
-            if (!index)
+            // If there's no index, pop() it
+            if (index === null)
                 this.vuedals.pop();
             else
                 this.vuedals.splice(index, 1);
@@ -67,55 +91,72 @@ export default {
             }
         },
 
-        // Close the modal and pass any given data
-        close(data = null, index = null) {
+        doClose(data = null, index) {
             // If there's nothing to close, ignore it
             if (!this.vuedals.length)
                 return;
+            
+            if (!this.vuedals[index])
+                return;
 
-            if (!index)
-                // Close the most recent Vuedal instance
-                index = this.$last;
+            this.splice(index);
+
+            // Firefox fix: https://github.com/javisperez/vuedals/issues/1
+            const vuedals = document.querySelector('.vuedals');
+
+            if (vuedals)
+                vuedals.scrollTop = 0;
+        },
+
+        // Close the modal and pass any given data
+        close(data = null, index = null) {
+            let localIndex = index;
+
+            // If the index is a function, pass the current open vuedal index
+            if (index && typeof index === 'function')
+                localIndex = index(this.$last);
+
+            // If the index is either null or undefined
+            if (typeof localIndex !== 'number')
+                localIndex = this.$last;
 
             // Notify the app about this window being closed
             Bus.$emit('closed', {
-                index,
+                index: localIndex,
                 instance: this.vuedals[index],
                 data
             });
 
             // Close callback
-            this.vuedals[index].onClose(data);
+            if (localIndex && this.vuedals[localIndex])
+                this.vuedals[localIndex].onClose(data);
 
-            this.splice(index);
-
-            // Firefox fix: https://github.com/javisperez/vuedals/issues/1
-            document.querySelector('.vuedals').scrollTop = 0;
+            this.doClose(data, localIndex);
         },
 
         // Dismiss the active modal
         dismiss(index = null) {
-            // If there's nothing to close, ignore it
-            if (!this.vuedals.length)
-                return;
+            let localIndex = index;
 
-            if (!index)
-                // Close the most recent Vuedal instance
-                index = this.$last;
+            // If the index is a function, pass the current open vuedal index
+            if (index && typeof index === 'function')
+                localIndex = index(this.$last);
+
+            // If the index is either null or undefined
+            if (typeof localIndex !== 'number')
+                localIndex = this.$last;
 
             // Check dismiss callback result for prevention
-            if (this.vuedals[index].onDismiss() === false) return;
+            if (this.vuedals[localIndex].onDismiss() === false)
+                return;
 
             // Notify the app about this window being closed
             Bus.$emit('dismissed', {
-                index,
-                instance: this.vuedals[index]
+                index: localIndex,
+                instance: this.vuedals[localIndex]
             });
 
-            this.splice(index);
-
-            // Firefox fix: https://github.com/javisperez/vuedals/issues/1
-            document.querySelector('.vuedals').scrollTop = 0;
+            this.doClose(null, localIndex);
         },
 
         // Get css classes
@@ -128,10 +169,20 @@ export default {
                 classNames += ' disabled';
 
             return classNames;
+        },
+
+        handleEscapeKey(e) {
+            if (this.current.escapable)
+                this.dismiss();
         }
     },
 
     computed: {
+        // Get the current window
+        current() {
+            return this.vuedals[this.$last];
+        },
+
         // Get the last element of the Vuedals array (the most recent Vuedal instance)
         $last() {
             return this.vuedals.length - 1;

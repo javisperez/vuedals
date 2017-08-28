@@ -27,6 +27,10 @@ export default {
                 this.$on('close', data => {
                     this.close(data);
                 });
+
+                this.$on('dismiss', index => {
+                    this.dismiss(index || null);
+                });
             },
 
             methods: {
@@ -36,6 +40,10 @@ export default {
 
                 close(data = null) {
                     Bus.$emit('close', data);
+                },
+
+                dismiss(index = null) {
+                    Bus.$emit('dismiss', index);
                 }
             }
         });
@@ -49,6 +57,10 @@ export default {
 
                 this.$on('vuedals:close', data => {
                     Bus.$emit('close', data);
+                });
+
+                this.$on('vuedals:dismiss', index => {
+                    Bus.$emit('dismiss', index);
                 });
             }
         });
