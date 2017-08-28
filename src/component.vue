@@ -110,6 +110,10 @@ export default {
 
         // Close the modal and pass any given data
         close(data = null, index = null) {
+            // Can't close if there's no modal open
+            if (this.vuedals.length === 0)
+                return;
+
             let localIndex = index;
 
             // If the index is a function, pass the current open vuedal index
