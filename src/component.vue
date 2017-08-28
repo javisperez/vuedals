@@ -66,6 +66,11 @@ export default {
 
         // Close the modal and pass any given data
         close(data = null) {
+            // Can't close if there's no modal open
+            if (this.vuedals.length === 0) {
+                return;
+            }
+
             // Close the most recent Vuedal instance
             const index = this.vuedals.length - 1;
 
