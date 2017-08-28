@@ -130,7 +130,26 @@ methods: {
 }
 ```
 
-**For all these examples, the index number is optional**
+#### Closing an especific modal
+
+If you need to close a specific modal index, you can pass it as an `$index` property of the data.
+
+```js
+this.$vuedals.close({
+    $index: 3
+})
+```
+
+*$index* can be an integer or a function. In case $index is a function, the index of the current open modal is passed as argument
+
+```js
+this.$vuedals.close({
+    $index(current) {
+        // this will always close the previous modal
+        return current - 1;
+    }
+})
+```
 
 ### Events
 
@@ -228,6 +247,11 @@ Possible values are:
 Should the modal include an "X" to be closed?
 
 *Default: true*
+
+#### escapable
+Can this modal be closed by pression the *esc* key?
+
+*Default: false*
 
 #### title
 Title of the modal window
