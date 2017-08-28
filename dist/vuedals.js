@@ -84,14 +84,14 @@ $export.P=8,// proto
 $export.B=16,// bind
 $export.W=32,// wrap
 $export.U=64,// safe
-$export.R=128,// real proto method for `library`
+$export.R=128,// real proto method for `library` 
 module.exports=$export},/* 8 */
 /***/
 function(module,exports){
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global=module.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=global)},/* 9 */
 /***/
-function(module,exports){var core=module.exports={version:"2.5.0"};"number"==typeof __e&&(__e=core)},/* 10 */
+function(module,exports){var core=module.exports={version:"2.4.0"};"number"==typeof __e&&(__e=core)},/* 10 */
 /***/
 function(module,exports,__webpack_require__){
 // optional / simple context binding
@@ -201,7 +201,7 @@ compiledTemplate&&(options.render=compiledTemplate.render,options.staticRenderFn
 // scopedId
 scopeId&&(options._scopeId=scopeId),cssModules){var computed=options.computed||(options.computed={});Object.keys(cssModules).forEach(function(key){var module=cssModules[key];computed[key]=function(){return module}})}return{esModule:esModule,exports:scriptExports,options:options}}},/* 29 */
 /***/
-function(module,exports,__webpack_require__){"use strict";function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj}}Object.defineProperty(exports,"__esModule",{value:!0});var _assign=__webpack_require__(30),_assign2=_interopRequireDefault(_assign),_bus=__webpack_require__(1),_bus2=_interopRequireDefault(_bus);exports.default={name:"vuedals",created:function(){var _this=this;_bus2.default.$on("new",function(options){var defaults={title:null,dismissable:!0,name:"",size:"md",onClose:function(){},onDismiss:function(){}};options=(0,_assign2.default)(defaults,options),_this.vuedals.push(options),_bus2.default.$emit("opened",{index:_this.vuedals.length-1,options:options}),_this.body.classList.add("vuedal-open"),document.querySelector(".vuedals").scrollTop=0}),_bus2.default.$on("close",function(data){return _this.close(data)}),_bus2.default.$on("dismiss",function(_){return _this.dismiss()})},data:function(){return{vuedals:[]}},methods:{splice:function(index){return 0===index&&(this.body.classList.remove("vuedal-open"),_bus2.default.$emit("destroyed")),index?void(index!==-1&&this.vuedals.splice(index,1)):void this.vuedals.pop()},close:function(){var data=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,index=this.vuedals.length-1;_bus2.default.$emit("closed",{index:index,instance:this.vuedals[index],data:data}),this.vuedals[index].onClose(data),this.splice(index),document.querySelector(".vuedals").scrollTop=0},dismiss:function(){var index=this.vuedals.length-1;this.vuedals[index].onDismiss()!==!1&&(_bus2.default.$emit("dismissed",{index:index,instance:this.vuedals[index]}),this.splice(index),document.querySelector(".vuedals").scrollTop=0)},getCssClasses:function(index){var vuedal=this.vuedals[index],classNames=vuedal.name+" "+vuedal.size;return index<this.$last&&(classNames+=" disabled"),classNames}},computed:{$last:function(){return this.vuedals.length-1},body:function(){if("undefined"!=typeof document)return document.querySelector("body")}}}},/* 30 */
+function(module,exports,__webpack_require__){"use strict";function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj}}Object.defineProperty(exports,"__esModule",{value:!0});var _assign=__webpack_require__(30),_assign2=_interopRequireDefault(_assign),_bus=__webpack_require__(1),_bus2=_interopRequireDefault(_bus);exports.default={name:"vuedals",created:function(){var _this=this;_bus2.default.$on("new",function(options){var defaults={title:null,dismissable:!0,name:"",size:"md",onClose:function(){},onDismiss:function(){}};options=(0,_assign2.default)(defaults,options),_this.vuedals.push(options),_bus2.default.$emit("opened",{index:_this.vuedals.length-1,options:options}),_this.body.classList.add("vuedal-open"),document.querySelector(".vuedals").scrollTop=0}),_bus2.default.$on("close",function(data){return _this.close(data)}),_bus2.default.$on("dismiss",function(_){return _this.dismiss()})},data:function(){return{vuedals:[]}},methods:{splice:function(index){return 0===index&&(this.body.classList.remove("vuedal-open"),_bus2.default.$emit("destroyed")),index?void(index!==-1&&this.vuedals.splice(index,1)):void this.vuedals.pop()},close:function(){var data=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null;if(0!==this.vuedals.length){var index=this.vuedals.length-1;_bus2.default.$emit("closed",{index:index,instance:this.vuedals[index],data:data}),this.vuedals[index].onClose(data),this.splice(index),document.querySelector(".vuedals").scrollTop=0}},dismiss:function(){var index=this.vuedals.length-1;this.vuedals[index].onDismiss()!==!1&&(_bus2.default.$emit("dismissed",{index:index,instance:this.vuedals[index]}),this.splice(index),document.querySelector(".vuedals").scrollTop=0)},getCssClasses:function(index){var vuedal=this.vuedals[index],classNames=vuedal.name+" "+vuedal.size;return index<this.$last&&(classNames+=" disabled"),classNames}},computed:{$last:function(){return this.vuedals.length-1},body:function(){if("undefined"!=typeof document)return document.querySelector("body")}}}},/* 30 */
 /***/
 function(module,exports,__webpack_require__){module.exports={default:__webpack_require__(31),__esModule:!0}},/* 31 */
 /***/
@@ -234,9 +234,7 @@ var IObject=__webpack_require__(38),defined=__webpack_require__(40);module.expor
 /***/
 function(module,exports,__webpack_require__){
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof=__webpack_require__(39);
-// eslint-disable-next-line no-prototype-builtins
-module.exports=Object("z").propertyIsEnumerable(0)?Object:function(it){return"String"==cof(it)?it.split(""):Object(it)}},/* 39 */
+var cof=__webpack_require__(39);module.exports=Object("z").propertyIsEnumerable(0)?Object:function(it){return"String"==cof(it)?it.split(""):Object(it)}},/* 39 */
 /***/
 function(module,exports){var toString={}.toString;module.exports=function(it){return toString.call(it).slice(8,-1)}},/* 40 */
 /***/
@@ -247,12 +245,9 @@ module.exports=function(it){if(void 0==it)throw TypeError("Can't call method on 
 function(module,exports,__webpack_require__){
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject=__webpack_require__(37),toLength=__webpack_require__(42),toAbsoluteIndex=__webpack_require__(44);module.exports=function(IS_INCLUDES){return function($this,el,fromIndex){var value,O=toIObject($this),length=toLength(O.length),index=toAbsoluteIndex(fromIndex,length);
+var toIObject=__webpack_require__(37),toLength=__webpack_require__(42),toIndex=__webpack_require__(44);module.exports=function(IS_INCLUDES){return function($this,el,fromIndex){var value,O=toIObject($this),length=toLength(O.length),index=toIndex(fromIndex,length);
 // Array#includes uses SameValueZero equality algorithm
-// eslint-disable-next-line no-self-compare
-if(IS_INCLUDES&&el!=el){for(;length>index;)
-// eslint-disable-next-line no-self-compare
-if(value=O[index++],value!=value)return!0}else for(;length>index;index++)if((IS_INCLUDES||index in O)&&O[index]===el)return IS_INCLUDES||index||0;return!IS_INCLUDES&&-1}}},/* 42 */
+if(IS_INCLUDES&&el!=el){for(;length>index;)if(value=O[index++],value!=value)return!0}else for(;length>index;index++)if((IS_INCLUDES||index in O)&&O[index]===el)return IS_INCLUDES||index||0;return!IS_INCLUDES&&-1}}},/* 42 */
 /***/
 function(module,exports,__webpack_require__){
 // 7.1.15 ToLength
