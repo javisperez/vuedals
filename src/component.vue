@@ -57,7 +57,9 @@ export default {
         });
 
         window.addEventListener('keyup', e => {
-            this.handleEscapeKey(e);
+			if(e.key == "Escape"){
+				this.handleEscapeKey(e); 
+			}            
         });
     },
 
