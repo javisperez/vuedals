@@ -55,12 +55,6 @@ export default {
 
             this.dismiss(index);
         });
-
-        window.addEventListener('keyup', e => {
-			if(e.key == "Escape"){
-				this.handleEscapeKey(e); 
-			}            
-        });
     },
 
     data() {
@@ -178,6 +172,9 @@ export default {
         },
 
         handleEscapeKey(e) {
+            if (!this.vuedals.length)
+                return;
+
             if (this.current.escapable)
                 this.dismiss();
         }
@@ -205,7 +202,7 @@ export default {
 
 <template>
 <transition tag="div" name="vuedal">
-    <div class="vuedals" v-show="vuedals.length">
+    <div class="vuedals" v-show="vuedals.length" tabindex="0" @keyup.esc.prevent="handleEscapeKey($event)">
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="index" :class="getCssClasses(index)">
             <header v-if="(vuedal.title || vuedal.dismissable) && !vuedal.header">
                 <span class="title">{{ vuedal.title }}</span>
