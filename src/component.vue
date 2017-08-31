@@ -128,7 +128,7 @@ export default {
             });
 
             // Close callback
-            if (localIndex && this.vuedals[localIndex])
+            if (localIndex !== false && this.vuedals[localIndex])
                 this.vuedals[localIndex].onClose(data);
 
             this.doClose(data, localIndex);
