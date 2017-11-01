@@ -1,5 +1,5 @@
 /*!
- *  Vuedals plugin v1.6.2
+ *  Vuedals plugin v1.7.0
  * 
  *  Multiple event based modal windows, with a single component
  * 
