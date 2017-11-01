@@ -144,9 +144,9 @@ this.$vuedals.close({
 
 ```js
 this.$vuedals.close({
-    $index(current) {
-        // this will always close the previous modal
-        return current - 1;
+    $index(data, vuedals) {
+        // this will always close the last modal
+        return vuedals.length - 1;
     }
 })
 ```
