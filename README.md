@@ -95,7 +95,7 @@ import {Bus as Vuedals} from 'vuedals';
 
 ...
 
-methods: { 
+methods: {
     openNewModal() {
         Vuedals.$emit('new', { options });
     }
@@ -123,7 +123,7 @@ import {Bus as Vuedals} from 'vuedals';
 
 ...
 
-methods: { 
+methods: {
     openNewModal() {
         Vuedals.$emit('close'[, data]);
     }
@@ -140,7 +140,7 @@ this.$vuedals.close({
 })
 ```
 
-*$index* can be an integer or a function. In case $index is a function, the index of the current open modal is passed as argument
+*$index* can be an integer or a function. In case $index is a function, the additional data and all the vuedals that is currently present is `index(data, this.vuedals)` passed as argument so that you can determine the index of the vudedal to close and return the index of it
 
 ```js
 this.$vuedals.close({
