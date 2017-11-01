@@ -69,7 +69,7 @@ export default {
         splice(index = null) {
             if (index === -1)
                 return;
-            
+
             // If there's nothing to close, ignore it
             if (!this.vuedals.length)
                 return;
@@ -79,7 +79,7 @@ export default {
                 this.vuedals.pop();
             else
                 this.vuedals.splice(index, 1);
-            
+
             // And if it was the last window, notify that all instances are destroyed
             if (!this.vuedals.length) {
                 this.body.classList.remove('vuedal-open');
@@ -91,7 +91,7 @@ export default {
             // If there's nothing to close, ignore it
             if (!this.vuedals.length)
                 return;
-            
+
             if (!this.vuedals[index])
                 return;
 
@@ -113,8 +113,9 @@ export default {
             let localIndex = index;
 
             // If the index is a function, pass the current open vuedal index
-            if (index && typeof index === 'function')
-                localIndex = index(this.$last);
+            if (index && typeof index === 'function') {
+              localIndex = index(data, this.vuedals);
+            }
 
             // If the index is either null or undefined
             if (typeof localIndex !== 'number')
