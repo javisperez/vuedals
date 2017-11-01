@@ -102,8 +102,8 @@ const ModalComponent3 = {
 
         closePrevious()  {
             Bus.$emit('close', {
-                $index(current) {
-                    return current - 1;
+                $index(data, vuedals) {
+                    return vuedals.length - 2;
                 }
             });
         }
