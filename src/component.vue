@@ -212,7 +212,7 @@ export default {
             <header v-if="vuedal.header">
                 <component :is="vuedal.header.component" v-bind="vuedal.header.props"></component>
             </header>
-            <component :is="vuedal.component" v-bind="vuedal.props"></component>
+            <component :is="vuedal.component" v-bind="vuedal.props" @close="dismiss(index)"></component>
         </div>
     </div>
 </transition>
