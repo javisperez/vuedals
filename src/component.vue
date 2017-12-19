@@ -41,7 +41,7 @@ export default {
                 index = data.$index;
 
             // If a Vue component was passed as the data
-            if (data && data.$vnode) {
+            if (data && data._isVue) {
                 for (let [idx, vuedal] of this.$refs.components.entries()) {
                     if (data === vuedal) {
                         index = idx
