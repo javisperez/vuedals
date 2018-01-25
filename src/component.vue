@@ -40,6 +40,16 @@ export default {
             if (data && data.$index)
                 index = data.$index;
 
+            // If a Vue component was passed as the data
+            if (data && data._isVue) {
+                for (let [idx, vuedal] of this.$refs.components.entries()) {
+                    if (data === vuedal) {
+                        index = idx
+                        break
+                    }
+                }
+            }
+            
             if (index === null)
                 // Close the most recent Vuedal instance
                 index = this.$last;
@@ -212,7 +222,7 @@ export default {
             <header v-if="vuedal.header">
                 <component :is="vuedal.header.component" v-bind="vuedal.header.props"></component>
             </header>
-            <component :is="vuedal.component" v-bind="vuedal.props"></component>
+            <component :is="vuedal.component" v-bind="vuedal.props" ref="components"></component>
         </div>
     </div>
 </transition>
