@@ -49,7 +49,7 @@ export default {
                     }
                 }
             }
-            
+
             if (index === null)
                 // Close the most recent Vuedal instance
                 index = this.$last;
@@ -147,6 +147,11 @@ export default {
 
         // Dismiss the active modal
         dismiss(index = null) {
+            // Can't dismiss modal if there's no modal open
+            if (this.vuedals.length === 0) {
+                return;
+            }
+
             let localIndex = index;
 
             // If the index is a function, pass the current open vuedal index
