@@ -258,6 +258,20 @@ Title of the modal window
 
 *Default: ''*
 
+#### notification
+An object that will be used to generate custom notifications
+
+*Default: null*
+
+```
+notification: {
+    component: 'notification-component',
+    props: {
+        custom: 'Props'
+    }
+}
+```
+
 #### header
 An object that will be used to generate a custom header
 

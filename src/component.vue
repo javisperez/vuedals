@@ -231,6 +231,9 @@ export default {
 <transition tag="div" name="vuedal">
     <div class="vuedals" v-show="vuedals.length" tabindex="0" @keyup.esc.prevent="handleEscapeKey($event)" @click="handleBackdropClick()">
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="index" :class="getCssClasses(index)" @click.stop>
+            <div v-if="vuedal.notification">
+                <component :is="vuedal.notification.component" v-bind="vuedal.notification.props"></component>
+            </div>
             <header v-if="(vuedal.title || vuedal.dismissable) && !vuedal.header">
                 <span class="title">{{ vuedal.title }}</span>
                 <span @click="dismiss()" v-if="vuedal.dismissable" class="close">&times;</span>
