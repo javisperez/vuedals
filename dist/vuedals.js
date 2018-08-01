@@ -91,7 +91,7 @@ function(module,exports){
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 var global=module.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=global)},/* 9 */
 /***/
-function(module,exports){var core=module.exports={version:"2.5.5"};"number"==typeof __e&&(__e=core)},/* 10 */
+function(module,exports){var core=module.exports={version:"2.5.7"};"number"==typeof __e&&(__e=core)},/* 10 */
 /***/
 function(module,exports,__webpack_require__){
 // optional / simple context binding
@@ -140,12 +140,12 @@ function(module,exports,__webpack_require__){
 // load the styles
 var content=__webpack_require__(25);"string"==typeof content&&(content=[[module.id,content,""]]),content.locals&&(module.exports=content.locals);
 // add the styles to the DOM
-__webpack_require__(27)("23e46aea",content,!0)},/* 25 */
+__webpack_require__(27)("e65878ce",content,!0)},/* 25 */
 /***/
 function(module,exports,__webpack_require__){exports=module.exports=__webpack_require__(26)(),
 // imports
 // module
-exports.push([module.id,'body.vuedal-open{overflow:hidden}.vuedals{background-color:rgba(0,0,0,.5);position:fixed;top:0;left:0;right:0;bottom:0;z-index:1050;overflow-x:hidden;overflow-y:auto;perspective:500px;transition:opacity .4s ease}.vuedal{background:#fff;box-shadow:3px 5px 20px #333;padding:20px;margin:30px 0;transition:all .6s ease;position:absolute;left:50%;transform:translateX(-50%);will-change:transform;width:650px}.vuedal.xl{width:1024px}.vuedal.lg{width:850px}.vuedal.sm{width:550px}.vuedal.xs{width:350px}.vuedal.disabled{opacity:.2}.vuedal.disabled:after{background:transparent;content:"";position:absolute;top:0;left:0;right:0;bottom:0;z-index:100}.vuedal header{border-bottom:1px solid #eee;min-height:32px;margin-bottom:20px}.vuedal header .title{font-size:21px;font-weight:100}.vuedal header .close{float:right;font-size:26px;font-weight:100;line-height:21px;cursor:pointer}.vuedal-enter,.vuedal-leave-active{opacity:0}.vuedal-enter .vuedal,.vuedal-leave-active .vuedal{opacity:0;transform:translateX(-50%) translateY(-30px) scale(.95)}',""])},/* 26 */
+exports.push([module.id,'body.vuedal-open{overflow:hidden}.vuedals{background-color:rgba(0,0,0,.5);position:fixed;top:0;left:0;right:0;bottom:0;z-index:1050;overflow-x:hidden;overflow-y:auto;perspective:500px;transition:opacity .4s ease}.vuedal{background:#fff;box-shadow:3px 5px 20px #333;padding:20px;margin:30px 0;transition:all .6s ease;position:absolute;left:50%;transform:translateX(-50%);will-change:transform;width:95%;max-width:650px}.vuedal.xl{max-width:1024px}.vuedal.lg{max-width:850px}.vuedal.sm{max-width:550px}.vuedal.xs{max-width:350px}.vuedal.disabled{opacity:.2}.vuedal.disabled:after{background:transparent;content:"";position:absolute;top:0;left:0;right:0;bottom:0;z-index:100}.vuedal header{border-bottom:1px solid #eee;min-height:32px;margin-bottom:20px}.vuedal header .title{font-size:21px;font-weight:100}.vuedal header .close{float:right;font-size:26px;font-weight:100;line-height:21px}.vuedal-enter,.vuedal-leave-active{opacity:0}.vuedal-enter .vuedal,.vuedal-leave-active .vuedal{opacity:0;transform:translateX(-50%) translateY(-30px) scale(.95)}',""])},/* 26 */
 /***/
 function(module,exports){/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -311,7 +311,7 @@ function(module,exports,__webpack_require__){var toInteger=__webpack_require__(5
 /***/
 function(module,exports,__webpack_require__){var shared=__webpack_require__(56)("keys"),uid=__webpack_require__(57);module.exports=function(key){return shared[key]||(shared[key]=uid(key))}},/* 56 */
 /***/
-function(module,exports,__webpack_require__){var global=__webpack_require__(8),SHARED="__core-js_shared__",store=global[SHARED]||(global[SHARED]={});module.exports=function(key){return store[key]||(store[key]={})}},/* 57 */
+function(module,exports,__webpack_require__){var core=__webpack_require__(9),global=__webpack_require__(8),SHARED="__core-js_shared__",store=global[SHARED]||(global[SHARED]={});(module.exports=function(key,value){return store[key]||(store[key]=void 0!==value?value:{})})("versions",[]).push({version:core.version,mode:__webpack_require__(44)?"pure":"global",copyright:"© 2018 Denis Pushkarev (zloirock.ru)"})},/* 57 */
 /***/
 function(module,exports){var id=0,px=Math.random();module.exports=function(key){return"Symbol(".concat(void 0===key?"":key,")_",(++id+px).toString(36))}},/* 58 */
 /***/
@@ -376,4 +376,4 @@ function(module,exports){exports.f=Object.getOwnPropertySymbols},/* 77 */
 /***/
 function(module,exports){exports.f={}.propertyIsEnumerable},/* 78 */
 /***/
-function(module,exports){module.exports={render:function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("transition",{attrs:{tag:"div",name:"vuedal"}},[_c("div",{directives:[{name:"show",rawName:"v-show",value:_vm.vuedals.length,expression:"vuedals.length"}],staticClass:"vuedals",attrs:{tabindex:"0"},on:{keyup:function($event){return"button"in $event||!_vm._k($event.keyCode,"esc",27,$event.key,"Escape")?($event.preventDefault(),void _vm.handleEscapeKey($event)):null},click:function($event){_vm.handleBackdropClick()}}},_vm._l(_vm.vuedals,function(vuedal,index){return _c("div",{key:index,staticClass:"vuedal",class:_vm.getCssClasses(index),on:{click:function($event){$event.stopPropagation()}}},[!vuedal.title&&!vuedal.dismissable||vuedal.header?_vm._e():_c("header",[_c("span",{staticClass:"title"},[_vm._v(_vm._s(vuedal.title))]),_vm._v(" "),vuedal.dismissable?_c("span",{staticClass:"close",on:{click:function($event){_vm.dismiss()}}},[_vm._v("×")]):_vm._e()]),_vm._v(" "),vuedal.header?_c("header",[_c(vuedal.header.component,_vm._b({tag:"component"},"component",vuedal.header.props,!1))],1):_vm._e(),_vm._v(" "),_c(vuedal.component,_vm._b({ref:"components",refInFor:!0,tag:"component"},"component",vuedal.props,!1))],1)}))])},staticRenderFns:[]}}])});
+function(module,exports){module.exports={render:function(){var _vm=this,_h=_vm.$createElement,_c=_vm._self._c||_h;return _c("transition",{attrs:{tag:"div",name:"vuedal"}},[_c("div",{directives:[{name:"show",rawName:"v-show",value:_vm.vuedals.length,expression:"vuedals.length"}],staticClass:"vuedals",attrs:{tabindex:"0"},on:{keyup:function($event){return"button"in $event||!_vm._k($event.keyCode,"esc",27,$event.key,"Escape")?($event.preventDefault(),void _vm.handleEscapeKey($event)):null},click:function($event){_vm.handleBackdropClick()}}},_vm._l(_vm.vuedals,function(vuedal,index){return _c("div",{key:index,staticClass:"vuedal",class:_vm.getCssClasses(index),on:{click:function($event){$event.stopPropagation()}}},[!vuedal.title&&!vuedal.dismissable||vuedal.header?_vm._e():_c("header",[_c("span",{staticClass:"title"},[_vm._v(_vm._s(vuedal.title))]),_vm._v(" "),vuedal.dismissable?_c("a",{staticClass:"close",attrs:{href:""},on:{click:function($event){$event.preventDefault(),_vm.dismiss()}}},[_vm._v("×")]):_vm._e()]),_vm._v(" "),vuedal.header?_c("header",[_c(vuedal.header.component,_vm._b({tag:"component"},"component",vuedal.header.props,!1))],1):_vm._e(),_vm._v(" "),_c(vuedal.component,_vm._b({ref:"components",refInFor:!0,tag:"component"},"component",vuedal.props,!1))],1)}))])},staticRenderFns:[]}}])});
