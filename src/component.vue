@@ -231,11 +231,11 @@ export default {
 <transition tag="div" name="vuedal">
     <div class="vuedals" v-show="vuedals.length" tabindex="0" @keyup.esc.prevent="handleEscapeKey($event)" @click="handleBackdropClick()">
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="index" :class="getCssClasses(index)" @click.stop>
-            <header v-if="(vuedal.title || vuedal.dismissable) && !vuedal.header">
+            <header class="vuedal-header" v-if="(vuedal.title || vuedal.dismissable) && !vuedal.header">
                 <span class="title">{{ vuedal.title }}</span>
                 <span @click="dismiss()" v-if="vuedal.dismissable" class="close">&times;</span>
             </header>
-            <header v-if="vuedal.header">
+            <header class="vuedal-header" v-if="vuedal.header">
                 <component :is="vuedal.header.component" v-bind="vuedal.header.props"></component>
             </header>
             <component :is="vuedal.component" v-bind="vuedal.props" ref="components"></component>
@@ -297,16 +297,16 @@ export default {
             z-index: 100;
         }
     }
+}
 
-    header {
-        border-bottom: 1px solid #EEE;
-        min-height: 32px;
-        margin-bottom: 20px;
+.vuedal-header {
+    border-bottom: 1px solid #EEE;
+    min-height: 32px;
+    margin-bottom: 20px;
 
-        .title { font-size: 21px; font-weight: 100;}
+    .title { font-size: 21px; font-weight: 100;}
 
-        .close { float: right; font-size: 26px; font-weight: 100; line-height: 21px; cursor: pointer; }
-    }
+    .close { float: right; font-size: 26px; font-weight: 100; line-height: 21px; cursor: pointer; }
 }
 
 .vuedal-enter,
