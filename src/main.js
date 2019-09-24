@@ -2,7 +2,7 @@ import Bus from './bus';
 import Component from './component.vue';
 
 export default {
-    install(Vue) {
+    install(Vue,options) {
         // Global $vuedals property
         Vue.prototype.$vuedals = new Vue({
             name: '$vuedals',

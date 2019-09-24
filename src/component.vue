@@ -140,7 +140,7 @@ export default {
 </transition>
 </template>
 
-<style lang="sass">
+<style lang="scss">
 
 .vuedals {
     background-color: rgba(0,0,0,.5);
