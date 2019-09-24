@@ -31,44 +31,44 @@ import {default as Vuedals, Component as Vuedal, Bus as VuedalsBus} from 'vuedal
 Vue.use(Vuedals);
 
 var myComp = Vue.extend({
-	template: `<div>
-	        <h1>Hello World!</h1>
-			<button @click="showIt()">Show me the money</button>
-	    </div>`,
-	
-	methods: {
-		showIt() {
-			VuedalsBus.$emit('new', {
-				name: 'showing-the-money',
+    template: `<div>
+            <h1>Hello World!</h1>
+            <button @click="showIt()">Show me the money</button>
+        </div>`,
 
-				component: {
-					name: 'the-money',
+    methods: {
+        showIt() {
+            VuedalsBus.$emit('new', {
+                name: 'showing-the-money',
 
-					template: `
-						<div>
-							<h1>THE MONEY!</h1>
-							<p>Money, money, money, moooneeyyy $ $ $ $</p>
-						</div>
-					`
-				}
-			});
-		}
-	}
+                component: {
+                    name: 'the-money',
+
+                    template: `
+                        <div>
+                            <h1>THE MONEY!</h1>
+                            <p>Money, money, money, moooneeyyy $ $ $ $</p>
+                        </div>
+                    `
+                }
+            });
+        }
+    }
 });
 
 var vm = new Vue({
-	el: '#app',
-	
-	components: {
-		myComp,
-		Vuedal
-	},
-	
-	template: `<div>
-	    <my-comp></my-comp>
+    el: '#app',
 
-	    <vuedal></vuedal>
-	</div>`
+    components: {
+        myComp,
+        Vuedal
+    },
+
+    template: `<div>
+        <my-comp></my-comp>
+
+        <vuedal></vuedal>
+    </div>`
 });
 ```
 
@@ -95,10 +95,10 @@ import {Bus as Vuedals} from 'vuedals';
 
 ...
 
-methods: { 
-	openNewModal() {
-		Vuedals.$emit('new', { options });
-	}
+methods: {
+    openNewModal() {
+        Vuedals.$emit('new', { options });
+    }
 }
 ```
 
@@ -123,14 +123,33 @@ import {Bus as Vuedals} from 'vuedals';
 
 ...
 
-methods: { 
-	openNewModal() {
-		Vuedals.$emit('close'[, data]);
-	}
+methods: {
+    openNewModal() {
+        Vuedals.$emit('close'[, data]);
+    }
 }
 ```
 
-**For all these examples, the index number is optional**
+#### Closing an especific modal
+
+If you need to close a specific modal index, you can pass it as an `$index` property of the data.
+
+```js
+this.$vuedals.close({
+    $index: 3
+})
+```
+
+*$index* can be an integer or a function. In case $index is a function, the additional data and all the vuedals that is currently present is `index(data, this.vuedals)` passed as argument so that you can determine the index of the vudedal to close and return the index of it
+
+```js
+this.$vuedals.close({
+    $index(data, vuedals) {
+        // this will always close the latest modal
+        return vuedals.length - 1;
+    }
+})
+```
 
 ### Events
 
@@ -185,30 +204,30 @@ import {Bus as Vuedals} from 'vuedals';
 ...
 
 methods: {
-	openModal() {
-		this.$vuedals.open({
-			name: 'test-component',
+    openModal() {
+        this.$vuedals.open({
+            name: 'test-component',
 
             // Pass these props to the component
-			props: {
-				firstname: 'John',
-				lastname: 'Doe'
-			},
+            props: {
+                firstname: 'John',
+                lastname: 'Doe'
+            },
 
-			component: {
-				name: 'show-john-doe',
+            component: {
+                name: 'show-john-doe',
 
-				// Expect these props values
-				props: ['firstname', 'lastname'],
+                // Expect these props values
+                props: ['firstname', 'lastname'],
 
-				template: `
-					<div>
-						Hi {{ firstname }} {{ lastname }}
-					</div>
-				`
-			}
-		});
-	}	
+                template: `
+                    <div>
+                        Hi {{ firstname }} {{ lastname }}
+                    </div>
+                `
+            }
+        });
+    }
 }
 ```
 
@@ -229,6 +248,11 @@ Should the modal include an "X" to be closed?
 
 *Default: true*
 
+#### escapable
+Can this modal be closed by pression the *esc* key?
+
+*Default: false*
+
 #### title
 Title of the modal window
 
@@ -241,10 +265,10 @@ An object that will be used to generate a custom header
 
 ```
 header: {
-	component: 'header-component',
-	props: {
-		custom: 'Props'
-	}
+    component: 'header-component',
+    props: {
+        custom: 'Props'
+    }
 }
 ```
 
@@ -253,30 +277,30 @@ Callback function to call when the modal is closed. Any given data is passed as 
 
 ```js
 this.$vuedals.open({
-	name: 'test-component',
+    name: 'test-component',
 
     // Pass these props to the component
-	props: {
-		firstname: 'John',
-		lastname: 'Doe'
-	},
+    props: {
+        firstname: 'John',
+        lastname: 'Doe'
+    },
 
-	component: {
-		name: 'show-john-doe',
+    component: {
+        name: 'show-john-doe',
 
         // Pass these props to the component
-		props: ['firstname', 'lastname'],
+        props: ['firstname', 'lastname'],
 
-		template: `
-			<div>
-				Hi {{ firstname }} {{ lastname }}
-			</div>
-		`
-	},
+        template: `
+            <div>
+                Hi {{ firstname }} {{ lastname }}
+            </div>
+        `
+    },
 
-	onClose(data) {
-		console.log('Data received from the vuedal instance': data);
-	}
+    onClose(data) {
+        console.log('Data received from the vuedal instance': data);
+    }
 });
 ```
 
@@ -285,33 +309,35 @@ Callback function to call when the modal is closed.
 
 Please notice that even `close` and `dismiss` both close the active modal instance (closes the modal) only the `close` event accepts data argument that can be passed to the callback, while `dismiss` just send the modal to close.
 
+The callback may prevent the modal closing by returning `false`.
+
 Example:
 
 ```js
 this.$vuedals.open({
-	name: 'test-component',
+    name: 'test-component',
 
-	// Pass these props to the component
-	props: {
-		firstname: 'John',
-		lastname: 'Doe'
-	},
+    // Pass these props to the component
+    props: {
+        firstname: 'John',
+        lastname: 'Doe'
+    },
 
-	component: {
-		name: 'show-john-doe',
+    component: {
+        name: 'show-john-doe',
 
-		// expect these props
-		props: ['firstname', 'lastname'],
+        // expect these props
+        props: ['firstname', 'lastname'],
 
-		template: `
-			<div>
-				Hi {{ firstname }} {{ lastname }}
-			</div>
-		`
-	},
+        template: `
+            <div>
+                Hi {{ firstname }} {{ lastname }}
+            </div>
+        `
+    },
 
-	onDismiss() {
-		console.log('The user dismissed the modal');
-	}
+    onDismiss() {
+        console.log('The user dismissed the modal');
+    }
 });
 ```
