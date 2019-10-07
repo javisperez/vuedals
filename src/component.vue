@@ -233,7 +233,7 @@ export default {
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="index" :class="getCssClasses(index)" @click.stop>
             <header class="vuedal-header" v-if="(vuedal.title || vuedal.dismissable) && !vuedal.header">
                 <span class="title">{{ vuedal.title }}</span>
-                <span @click="dismiss()" v-if="vuedal.dismissable" class="close">&times;</span>
+                <a href @click.prevent="dismiss()" v-if="vuedal.dismissable" class="close">&times;</a>
             </header>
             <header class="vuedal-header" v-if="vuedal.header">
                 <component :is="vuedal.header.component" v-bind="vuedal.header.props"></component>
@@ -273,15 +273,16 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     will-change: transform;
-    width: 650px;
+    width: 95%;
+    max-width: 650px;
 
-    &.xl { width: 1024px; }
+    &.xl { max-width: 1024px; }
 
-    &.lg { width: 850px; }
+    &.lg { max-width: 850px; }
 
-    &.sm { width: 550px; }
+    &.sm { max-width: 550px; }
 
-    &.xs { width: 350px; }
+    &.xs { max-width: 350px; }
 
     &.disabled {
         opacity: 0.2;
@@ -306,8 +307,9 @@ export default {
 
     .title { font-size: 21px; font-weight: 100;}
 
-    .close { float: right; font-size: 26px; font-weight: 100; line-height: 21px; cursor: pointer; }
+    .close { float: right; font-size: 26px; font-weight: 100; line-height: 21px; }
 }
+
 
 .vuedal-enter,
 .vuedal-leave-active {
