@@ -231,11 +231,11 @@ export default {
 <transition tag="div" name="vuedal">
     <div class="vuedals" v-show="vuedals.length" tabindex="0" @keyup.esc.prevent="handleEscapeKey($event)" @click="handleBackdropClick()">
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="index" :class="getCssClasses(index)" @click.stop>
-            <header v-if="(vuedal.title || vuedal.dismissable) && !vuedal.header">
+            <header class="vuedal-header" v-if="(vuedal.title || vuedal.dismissable) && !vuedal.header">
                 <span class="title">{{ vuedal.title }}</span>
-                <span @click="dismiss()" v-if="vuedal.dismissable" class="close">&times;</span>
+                <a href @click.prevent="dismiss()" v-if="vuedal.dismissable" class="close">&times;</a>
             </header>
-            <header v-if="vuedal.header">
+            <header class="vuedal-header" v-if="vuedal.header">
                 <component :is="vuedal.header.component" v-bind="vuedal.header.props"></component>
             </header>
             <component :is="vuedal.component" v-bind="vuedal.props" ref="components"></component>
@@ -244,10 +244,10 @@ export default {
 </transition>
 </template>
 
-<style lang="sass">
-body.vuedal-open {
-    overflow: hidden;
-}
+<style lang="scss">
+    body.vuedal-open {
+        overflow: hidden;
+    }
 
 .vuedals {
     background-color: rgba(0,0,0,.5);
@@ -273,15 +273,16 @@ body.vuedal-open {
     left: 50%;
     transform: translateX(-50%);
     will-change: transform;
-    width: 650px;
+    width: 95%;
+    max-width: 650px;
 
-    &.xl { width: 1024px; }
+    &.xl { max-width: 1024px; }
 
-    &.lg { width: 850px; }
+    &.lg { max-width: 850px; }
 
-    &.sm { width: 550px; }
+    &.sm { max-width: 550px; }
 
-    &.xs { width: 350px; }
+    &.xs { max-width: 350px; }
 
     &.disabled {
         opacity: 0.2;
@@ -297,17 +298,18 @@ body.vuedal-open {
             z-index: 100;
         }
     }
-
-    header {
-        border-bottom: 1px solid #EEE;
-        min-height: 32px;
-        margin-bottom: 20px;
-
-        .title { font-size: 21px; font-weight: 100;}
-
-        .close { float: right; font-size: 26px; font-weight: 100; line-height: 21px; cursor: pointer; }
-    }
 }
+
+.vuedal-header {
+    border-bottom: 1px solid #EEE;
+    min-height: 32px;
+    margin-bottom: 20px;
+
+    .title { font-size: 21px; font-weight: 100;}
+
+    .close { float: right; font-size: 26px; font-weight: 100; line-height: 21px; }
+}
+
 
 .vuedal-enter,
 .vuedal-leave-active {
