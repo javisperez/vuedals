@@ -1,5 +1,8 @@
 node_modules/
 .DS_Store
 .vscode/
+.history/
+dist/
 *.iml
 .idea
+*.tgz
