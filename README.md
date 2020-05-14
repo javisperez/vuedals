@@ -253,6 +253,11 @@ Can this modal be closed by pression the *esc* key?
 
 *Default: false*
 
+#### closeOnBackdrop
+Optionally prevent closing when clicking on backdrop
+
+*Default: true*
+
 #### title
 Title of the modal window
 
