@@ -71,7 +71,8 @@ export default {
     data() {
         return {
             // Storage for all the vuedal's instances
-            vuedals: []
+            vuedals: [],
+            isMouseDownTriggeredOnSelf: false
         };
     },
 
@@ -203,6 +204,7 @@ export default {
 
             if (this.current.closeOnBackdrop === true) {
                 this.dismiss();
+                this.isMouseDownTriggeredOnSelf = false;
             }
         }
     },
@@ -229,7 +231,7 @@ export default {
 
 <template>
 <transition tag="div" name="vuedal">
-    <div class="vuedals" v-show="vuedals.length" tabindex="0" @keyup.esc.prevent="handleEscapeKey($event)" @click="handleBackdropClick()">
+    <div class="vuedals" v-show="vuedals.length" tabindex="0" @keyup.esc.prevent="handleEscapeKey($event)" @click="handleBackdropClick()" @mousedown.self="isMouseDownTriggeredOnSelf = true">
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="index" :class="getCssClasses(index)" @click.stop>
             <header v-if="(vuedal.title || vuedal.dismissable) && !vuedal.header">
                 <span class="title">{{ vuedal.title }}</span>
