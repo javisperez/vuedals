@@ -60,15 +60,22 @@ export default defineComponent({
   >
     <!-- Backdrop -->
     <div
+      v-if="instances.length"
       class="vuedals-backdrop"
       @click="onBackdropClick"
-      v-if="instances.length"
-    ></div>
+    />
 
     <!-- Modals -->
-    <template v-for="modal in instances" :key="modal.id">
+    <template
+      v-for="modal in instances"
+    >
       <!-- Non-customized components -->
-      <VuedalModal :id="modal.id" :title="modal.title" v-if="!modal.isCustom">
+      <VuedalModal
+        v-if="!modal.isCustom"
+        :id="modal.id"
+        :key="modal.id"
+        :title="modal.title"
+      >
         <component
           :is="modal.component"
           v-bind="modal.props"
@@ -78,11 +85,12 @@ export default defineComponent({
 
       <!-- Custom components that implements <Vuedal /> by its own -->
       <component
-        v-else
         :is="modal.component"
+        v-else
+        :key="modal.id"
         v-bind="modal.props"
-        :_vuedal-id="modal.id"
         :ref="modal.componentRef"
+        :_vuedal-id="modal.id"
       />
     </template>
   </div>

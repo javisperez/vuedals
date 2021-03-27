@@ -18,6 +18,7 @@
     "./dist/*.d.ts"
   ],
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
     "core-js": "^3.9.1",
     "vue": "^3.0.4",
     "vue-router": "^4.0.0-0"
@@ -25,8 +26,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.13.10",
     "@tailwindcss/postcss7-compat": "^2.0.4",
-    "@typescript-eslint/eslint-plugin": "^4.17.0",
-    "@typescript-eslint/parser": "^4.17.0",
+    "@typescript-eslint/parser": "^4.19.0",
     "@vue/cli-plugin-babel": "~4.5.11",
     "@vue/cli-plugin-eslint": "~4.5.11",
     "@vue/cli-plugin-router": "^4.5.11",
@@ -46,7 +46,7 @@
     "typescript": "~4.2.3"
   },
   "gitHooks": {
-
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [

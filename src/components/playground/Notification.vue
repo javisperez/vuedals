@@ -20,7 +20,11 @@ export default defineComponent({
     <div>Input should be focused.</div>
 
     <div>
-      <input placeholder="focus" class="border p-2 rounded" ref="input" />
+      <input
+        ref="input"
+        placeholder="focus"
+        class="border p-2 rounded"
+      >
     </div>
   </Vuedal>
 </template>

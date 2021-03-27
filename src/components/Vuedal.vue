@@ -11,9 +11,13 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      required: false
+      required: false,
+      default: '',
     },
-    title: String
+    title: {
+      type: String,
+      default: '',
+    }
   },
 
   data() {
@@ -21,12 +25,6 @@ export default defineComponent({
       vuedalId: this.id || this.$parent?.$attrs["_vuedal-id"],
       isActive: false
     };
-  },
-
-  mounted() {
-    this.$nextTick(() => {
-      this.instance.isVisible = true;
-    });
   },
 
   computed: {
@@ -73,6 +71,18 @@ export default defineComponent({
     }
   },
 
+  watch: {
+    "instance.isActive"(isActive) {
+      this.isActive = isActive;
+    }
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      this.instance.isVisible = true;
+    });
+  },
+
   methods: {
     close(value?: unknown) {
       close(value, this.instance);
@@ -101,12 +111,6 @@ export default defineComponent({
     afterLeaveTransition() {
       remove(this.index);
     }
-  },
-
-  watch: {
-    "instance.isActive"(isActive) {
-      this.isActive = isActive;
-    }
   }
 });
 </script>
@@ -125,9 +129,9 @@ export default defineComponent({
     @after-leave="afterLeaveTransition"
   >
     <div
-      class="vuedal-modal"
       v-show="instance.isVisible"
       ref="vuedal"
+      class="vuedal-modal"
       :class="{
         [cssClasses.active]: isActive,
         [cssClasses.inactive]: !isActive,
@@ -135,15 +139,20 @@ export default defineComponent({
     >
       <!-- Header slot -->
       <slot
+        v-if="instance.header"
+        :id="vuedalId"
         name="header"
         :close="close"
-        :id="vuedalId"
         :title="instance.title"
-        v-if="instance.header"
       >
         <header>
-          <div class="title">{{ title }}</div>
-          <div class="close-icon" @click="close()">
+          <div class="title">
+            {{ title }}
+          </div>
+          <div
+            class="close-icon"
+            @click="close()"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="toe-icon ti ti-times"
@@ -158,10 +167,10 @@ export default defineComponent({
             >
               <path
                 d="M32.033 29.19l15.55-15.55 2.863 2.863-15.55 15.55 15.55 15.55-2.863 2.863-15.55-15.55-15.55 15.55-2.863-2.863 15.55-15.55-15.55-15.55 2.863-2.863 15.55 15.55z"
-              ></path>
+              />
               <path
                 d="M32.033 29.19l15.55-15.55 2.863 2.863-15.55 15.55 15.55 15.55-2.863 2.863-15.55-15.55-15.55 15.55-2.863-2.863 15.55-15.55-15.55-15.55 2.863-2.863 15.55 15.55z"
-              ></path>
+              />
             </svg>
           </div>
         </header>
@@ -169,15 +178,18 @@ export default defineComponent({
 
       <!-- Content slot -->
       <div class="p-4">
-        <slot :close="close" :id="vuedalId" />
+        <slot
+          :id="vuedalId"
+          :close="close"
+        />
       </div>
 
       <!-- Footer slot -->
       <slot
+        v-if="instance.footer"
+        :id="vuedalId"
         name="footer"
         :close="close"
-        :id="vuedalId"
-        v-if="instance.footer"
       />
     </div>
   </transition>

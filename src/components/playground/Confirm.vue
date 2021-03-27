@@ -3,15 +3,15 @@ import { defineComponent } from "vue";
 import { Vuedal } from "../../main";
 
 export default defineComponent({
+
+  components: {
+    Vuedal
+  },
   props: {
     text: {
       type: String,
       required: true
     }
-  },
-
-  components: {
-    Vuedal
   },
 
   methods: {
@@ -25,7 +25,7 @@ export default defineComponent({
 <template>
   <vuedal>
     <template #header>
-      <span></span>
+      <span />
     </template>
 
     <div class="leading-relaxed">

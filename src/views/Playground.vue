@@ -60,7 +60,9 @@ export default {
 
 <template>
   <div class="p-2">
-    <h1 class="font-medium text-2xl text-gray-800">Vuedals Playground!</h1>
+    <h1 class="font-medium text-2xl text-gray-800">
+      Vuedals Playground!
+    </h1>
 
     <div class="m-5 border p-2 inline-block">
       <button

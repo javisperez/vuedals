@@ -92,8 +92,8 @@ export default defineComponent({
 
         <span
           :title="`Remove ${product}`"
-          @click="removeProduct(product)"
           class="cursor-pointer bg-white text-blue-500 rounded-full flex h-6 w-6 items-center justify-center hover:bg-gray-700 hover:text-white"
+          @click="removeProduct(product)"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -107,10 +107,10 @@ export default defineComponent({
           >
             <path
               d="M32.033 29.19l15.55-15.55 2.863 2.863-15.55 15.55 15.55 15.55-2.863 2.863-15.55-15.55-15.55 15.55-2.863-2.863 15.55-15.55-15.55-15.55 2.863-2.863 15.55 15.55z"
-            ></path>
+            />
             <path
               d="M32.033 29.19l15.55-15.55 2.863 2.863-15.55 15.55 15.55 15.55-2.863 2.863-15.55-15.55-15.55 15.55-2.863-2.863 15.55-15.55-15.55-15.55 2.863-2.863 15.55 15.55z"
-            ></path>
+            />
           </svg>
         </span>
       </li>
