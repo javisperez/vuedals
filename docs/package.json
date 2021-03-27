@@ -1,0 +1,19 @@
+{
+  "name": "docs",
+  "version": "0.0.1",
+  "description": "Modals made easy for Vue",
+  "main": "index.js",
+  "authors": {
+    "name": "Javis Pérez",
+    "email": "javisperez@gmail.com"
+  },
+  "repository": "vuedals/docs",
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.5.3"
+  }
+}

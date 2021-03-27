@@ -1,56 +1,58 @@
 {
   "name": "vuedals",
-  "version": "1.8.0",
+  "version": "2.0.0",
+  "private": false,
   "scripts": {
-    "build": "rm -rf ./dist && webpack --config ./webpack.config.js && webpack --config webpack.config.min.js",
-    "release": "bash ./release.sh",
-    "prepare": "npm run build"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "build:lib": "vue-cli-service build --target lib --name vuedals src/main.ts",
+    "build:lib2": "vue-cli-service build --target lib --name vuedals src/main.ts && tsc --emitDeclarationOnly --module commonjs",
+    "docs:build": "vuepress build docs",
+    "docs:serve": "vuepress dev docs",
+    "playground": "vue-cli-service serve src/playground.ts"
   },
-  "description": "Event based Vue's modal windows, with a single component",
-  "main": "dist/vuedals.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/javisperez/vuedals.git"
-  },
-  "keywords": [
-    "vue",
-    "vuejs",
-    "vuedals",
-    "modal",
-    "modals",
-    "modal windows",
-    "plugin"
+  "main": "./dist/vuedals.umd.min",
+  "files": [
+    "./dist/*.js",
+    "./dist/*.d.ts"
   ],
-  "author": {
-    "name": "Javis Perez",
-    "email": "javisperez@gmail.com"
-  },
-  "readme": "README.md",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/javisperez/vuedals/issues"
-  },
-  "homepage": "https://github.com/javisperez/vuedals",
   "dependencies": {
-    "macaddress": "^0.2.9",
-    "randomatic": "^3.1.1",
-    "vue": "^2.1.10"
+    "core-js": "^3.9.1",
+    "vue": "^3.0.4",
+    "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
-    "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
-    "babel-plugin-transform-runtime": "^6.22.0",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-stage-2": "^6.22.0",
-    "clean-css": "^4.1.11",
-    "css-loader": "^0.26.1",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^4.1.1",
-    "vue-html-loader": "^1.2.3",
-    "vue-loader": "^10.1.2",
-    "vue-style-loader": "^1.0.0",
-    "vue-template-compiler": "^2.1.10",
-    "webpack": "^1.14.0",
-    "webpack-merge": "^2.6.1"
-  }
+    "@babel/preset-env": "^7.13.10",
+    "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "@vue/cli-plugin-babel": "~4.5.11",
+    "@vue/cli-plugin-eslint": "~4.5.11",
+    "@vue/cli-plugin-router": "^4.5.11",
+    "@vue/cli-plugin-typescript": "~4.5.11",
+    "@vue/cli-service": "~4.5.11",
+    "@vue/compiler-sfc": "^3.0.7",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "autoprefixer": "^9.8.6",
+    "eslint": "^7.21.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.7.0",
+    "lint-staged": "^10.5.4",
+    "postcss": "^7.0.35",
+    "prettier": "^2.2.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4",
+    "typescript": "~4.2.3"
+  },
+  "gitHooks": {
+
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue,ts,tsx}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  },
+  "typings": "./dist/main.d.ts"
 }
