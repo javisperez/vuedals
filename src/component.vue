@@ -235,7 +235,7 @@ export default {
         <div class="vuedal" v-for="(vuedal, index) in vuedals" :key="index" :class="getCssClasses(index)" @click.stop>
             <header v-if="(vuedal.title || vuedal.dismissable) && !vuedal.header">
                 <span class="title">{{ vuedal.title }}</span>
-                <span @click="dismiss()" v-if="vuedal.dismissable" class="close">&times;</span>
+                <span @click="dismiss()" v-if="vuedal.dismissable" class="close" role="button">&times;</span>
             </header>
             <header v-if="vuedal.header">
                 <component :is="vuedal.header.component" v-bind="vuedal.header.props"></component>
